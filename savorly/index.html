@@ -48,93 +48,34 @@
 
 
     <main>
-        <section class="hero container" >
+            <section class="hero container">
+                <div class="hero-slider">
 
-            <div class="hero-slider">
-
-                <!-- Slide 1 -->
-                <article class="hero-slide active"
-                         data-slide="0">
-
-                    <div class="hero-content">
-                        <span class="eyebrow">TODAY'S SPECIAL</span>
-
-                        <h1>Fresh Pasta<br>With Tomato Sauce</h1>
-
-                        <p class="hero-description">
-                            A comforting Italian classic made with
-                            fresh tomatoes, fragrant herbs and love.
-                        </p>
-
-                        <div class="hero-meta">
-                            <span><i class="fa-regular fa-clock"></i> 25 minutes</span>
-                            <span>·</span>
-                            <span>Easy to make</span>
-                        </div>
-
-                        <a href="recipe.html?id=pasta"
-                           class="button button-primary">
-                            Explore Recipe
-                            <span ><i class="fa-solid fa-location-arrow"></i></span>
-                        </a>
-                    </div>
-
-                    <div class="hero-image">
-                        <img
-                            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=85"
-                            alt="Fresh pasta served with herbs and tomato sauce">
-                    </div>
-
-                </article>
+                <!-- Các slide sẽ được JavaScript tạo từ file JSON -->
+                <div class="hero-track" id="hero-track"></div>
 
                 <!-- Slider controls -->
-                <div class="slider-controls"
-                     >
+                <div class="slider-controls">
 
                     <button type="button"
                             class="slider-arrow"
                             id="prev-slide"
-                            >
+                            aria-label="Previous recipe">
                         <i class="fa-solid fa-arrow-left-long"></i>
                     </button>
 
-                    <div class="slider-pagination"
-                         >
-
-                        <button type="button"
-                                class="slider-dot active"
-                                data-target="0"
-                                
-                                aria-current="true"></button>
-
-                        <button type="button"
-                                class="slider-dot"
-                                data-target="1"
-                                ></button>
-
-                        <button type="button"
-                                class="slider-dot"
-                                data-target="2"
-                                ></button>
-
-                        <button type="button"
-                                class="slider-dot"
-                                data-target="3"
-                                ></button>
-
+                    <div class="slider-pagination" id="slider-pagination">
                     </div>
 
                     <button type="button"
                             class="slider-arrow"
                             id="next-slide"
-                            >
+                            aria-label="Next recipe">
                         <i class="fa-solid fa-arrow-right-long"></i>
                     </button>
 
                 </div>
-
             </div>
-
         </section>
 
         <section class="popular-section section container">
@@ -154,126 +95,8 @@
                 </a>
             </div>
 
-
-            <div class="recipe-grid">
-
-                <!-- Recipe Card 1 -->
-                <article class="recipe-card">
-
-                    <a href="recipe.html?id=pasta"
-                       class="recipe-image">
-                        <img
-                            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=85"
-                            alt="Fresh Italian pasta"
-                            loading="lazy">
-                    </a>
-
-                    <div class="recipe-info">
-                        <span class="recipe-category">ITALIAN</span>
-
-                        <h3>
-                            <a href="recipe.html?id=pasta">
-                                Fresh Tomato Pasta
-                            </a>
-                        </h3>
-
-                        <p>
-                            A classic pasta dish with fresh tomatoes
-                            and fragrant herbs.
-                        </p>
-
-                        <div class="recipe-bottom">
-                            <span><i class="fa-regular fa-clock"></i> 25 min</span>
-
-                            <a href="recipe.html?id=pasta"
-                               class="button button-outline">
-                                View Recipe
-                            </a>
-                        </div>
-                    </div>
-
-                </article>
-
-
-                <!-- Recipe Card 2 -->
-                <article class="recipe-card">
-
-                    <a href="recipe.html?id=salad"
-                       class="recipe-image">
-                        <img
-                            src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=85"
-                            alt="Fresh colorful garden salad"
-                            loading="lazy">
-                    </a>
-
-                    <div class="recipe-info">
-                        <span class="recipe-category">HEALTHY</span>
-
-                        <h3>
-                            <a href="recipe.html?id=salad">
-                                Garden Fresh Salad
-                            </a>
-                        </h3>
-
-                        <p>
-                            A colorful mix of crisp greens and
-                            refreshing vegetables.
-                        </p>
-
-                        <div class="recipe-bottom">
-                            <span><i class="fa-regular fa-clock"></i> 15 min</span>
-
-                            <a href="recipe.html?id=salad"
-                               class="button button-outline">
-                                View Recipe
-                            </a>
-                        </div>
-                    </div>
-
-                </article>
-
-
-                <!-- Recipe Card 3 -->
-                <article class="recipe-card">
-
-                    <a href="recipe.html?id=chicken"
-                       class="recipe-image">
-                        <img
-                            src="https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=800&q=85"
-                            alt="Roasted chicken with herbs"
-                            loading="lazy">
-                    </a>
-
-                    <div class="recipe-info">
-                        <span class="recipe-category">DINNER</span>
-
-                        <h3>
-                            <a href="recipe.html?id=chicken">
-                                Herb Roasted Chicken
-                            </a>
-                        </h3>
-
-                        <p>
-                            Tender chicken with herbs for a
-                            comforting homemade dinner.
-                        </p>
-
-                        <div class="recipe-bottom">
-                            <span><i class="fa-regular fa-clock"></i> 40 min</span>
-
-                            <a href="recipe.html?id=chicken"
-                               class="button button-outline">
-                                View Recipe
-                            </a>
-                        </div>
-                    </div>
-
-                </article>
-
-            </div>
-
+        <div class="recipe-grid" id="popular-recipe-grid"></div>
         </section>
-
 
        <!-- slider discovery -->
         <section class="discovery-section container">
@@ -384,8 +207,7 @@
     
     <!-- Nạp file chứa hàm loadRecipes -->
     <script src="/assets/js/recipes.js"></script>
-
-    
+    <script src="/assets/js/home.js"></script>
 
 </body>
 </html>
