@@ -303,6 +303,137 @@ p {
     transform: scale(1.06);
 }
 
+.account-slot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.nav-auth-link {
+    color: var(--blue);
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.nav-auth-link:hover {
+    color: var(--orange-dark);
+}
+
+.account-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 7px 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--blue-dark);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.account-trigger:hover,
+.account-trigger[aria-expanded="true"] {
+    border-color: var(--celeste-dark);
+    background: var(--celeste-light);
+}
+
+.account-avatar {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--orange);
+    color: var(--white);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.account-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    z-index: 1100;
+    width: min(300px, calc(100vw - 32px));
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--white);
+    box-shadow: 0 18px 45px rgba(23, 59, 80, 0.16);
+}
+
+.account-menu[hidden] {
+    display: none;
+}
+
+.account-menu-heading {
+    margin-bottom: 12px;
+    color: var(--blue-dark);
+    font-weight: 700;
+}
+
+.account-menu-list {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.account-menu-list div {
+    display: grid;
+    gap: 2px;
+}
+
+.account-menu-list dt {
+    color: var(--text-light);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.account-menu-list dd {
+    overflow-wrap: anywhere;
+    color: var(--blue);
+    font-size: 0.88rem;
+}
+
+.account-logout {
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid #F4D5C4;
+    border-radius: 12px;
+    background: #FFF8F4;
+    color: #A84D24;
+    font-weight: 700;
+}
+
+.account-logout:hover {
+    background: #FCE9DE;
+}
+
+@media (max-width: 760px) {
+    .navbar {
+        gap: 12px;
+    }
+
+    .nav-menu {
+        gap: 14px;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+    }
+
+    .account-name {
+        display: none;
+    }
+}
+
 
 /* ==================================================
    6. HERO SLIDER

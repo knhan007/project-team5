@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập | Savorly</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/auth.css">
+    <script src="https://kit.fontawesome.com/61c4a4816c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar container">
+            <a href="index.html" class="brand" aria-label="Trang chủ Savorly">
+                <span class="brand-icon">S</span>
+                <span class="brand-name">savorly<span>.</span></span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="explore.html" class="nav-link">Explore</a></li>
+                <li><a href="my-recipes.html" class="nav-link">My Recipe</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+            <div class="account-slot" data-account-slot>
+                <a href="explore.html" class="search-button" aria-label="Tìm kiếm công thức">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                </a>
+                <a href="login.html" class="nav-auth-link">Đăng nhập</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="auth-page">
+        <section class="auth-card" aria-labelledby="auth-title">
+            <span class="eyebrow">CHÀO MỪNG ĐẾN VỚI SAVORLY</span>
+            <h1 id="auth-title">Tài khoản của bạn</h1>
+            <p class="auth-intro">Đăng nhập hoặc tạo tài khoản để tiếp tục.</p>
+
+            <div class="auth-tabs" role="tablist" aria-label="Đăng nhập hoặc đăng ký">
+                <button class="auth-tab" type="button" role="tab" data-auth-tab="login"
+                        aria-selected="true" aria-controls="login-form">Đăng nhập</button>
+                <button class="auth-tab" type="button" role="tab" data-auth-tab="signup"
+                        aria-selected="false" aria-controls="signup-form" tabindex="-1">Đăng ký</button>
+            </div>
+
+            <form class="auth-form" id="login-form">
+                <label class="auth-field" for="login-email">
+                    Email
+                    <input id="login-email" name="email" type="email" autocomplete="email" required>
+                </label>
+                <label class="auth-field" for="login-password">
+                    Mật khẩu
+                    <input id="login-password" name="password" type="password"
+                           autocomplete="current-password" required>
+                </label>
+                <button class="button button-primary auth-submit" type="submit"
+                        data-label="Đăng nhập">Đăng nhập</button>
+            </form>
+
+            <form class="auth-form" id="signup-form" hidden>
+                <label class="auth-field" for="signup-name">
+                    Tên tài khoản
+                    <input id="signup-name" name="name" type="text" maxlength="60"
+                           autocomplete="name" required>
+                </label>
+                <label class="auth-field" for="signup-email">
+                    Email
+                    <input id="signup-email" name="email" type="email" autocomplete="email" required>
+                </label>
+                <label class="auth-field" for="signup-password">
+                    Mật khẩu (ít nhất 8 ký tự)
+                    <input id="signup-password" name="password" type="password"
+                           minlength="8" autocomplete="new-password" required>
+                </label>
+                <button class="button button-primary auth-submit" type="submit"
+                        data-label="Tạo tài khoản">Tạo tài khoản</button>
+            </form>
+
+            <p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
+        </section>
+    </main>
+
+    <script src="/assets/js/auth.js"></script>
+    <script src="/assets/js/account.js"></script>
+    <script src="/assets/js/login.js"></script>
+</body>
+</html>

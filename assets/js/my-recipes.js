@@ -30,7 +30,24 @@ const discardRecipeButton = document.getElementById(
    2. OPEN RECIPE FORM
 ======================================== */
 
-function openRecipeForm() {
+async function requireAccount() {
+    const profile = window.SavorlyAuth
+        ? await window.SavorlyAuth.restoreSession()
+        : null;
+    if (profile) {
+        return true;
+    }
+
+    const next = encodeURIComponent(
+        window.location.pathname + window.location.search + window.location.hash
+    );
+    window.location.assign("/savorly/login.html?next=" + next);
+    return false;
+}
+
+async function openRecipeForm() {
+    if (!await requireAccount()) return;
+
     // Show the form section
     formSection.hidden = false;
 
@@ -75,3 +92,11 @@ cancelRecipeButton.addEventListener("click", closeRecipeForm);
 
 // Cancel button: clear only, keep form open
 discardRecipeButton.addEventListener("click", clearRecipeForm);
+
+// Keep the save action protected even if the form is opened outside the buttons.
+recipeForm.addEventListener("submit", function (event) {
+    if (!window.SavorlyAuth || !window.SavorlyAuth.getSession()) {
+        event.preventDefault();
+        requireAccount();
+    }
+});
