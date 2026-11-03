@@ -1,11 +1,11 @@
 
-/* ==================================================
+/* 
    SAVORLY - ABOUT PAGE
    File: assets/css/about.css
-   ================================================== */
+    */
 
 
-/* ==================== GENERAL ==================== */
+/*  GENERAL  */
 
 .about-page {
     overflow: hidden;
@@ -59,7 +59,7 @@
 }
 
 
-/* ==================== HERO ==================== */
+/*  HERO  */
 
 .about-hero {
     padding: 145px 0 90px;
@@ -137,7 +137,7 @@
 }
 
 
-/* ==================== OUR STORY ==================== */
+/*  OUR STORY  */
 
 .about-story {
     background: var(--white);
@@ -178,7 +178,7 @@
 }
 
 
-/* ==================== OUR MISSION ==================== */
+/*  OUR MISSION  */
 
 .about-mission {
     background: var(--celeste-light);
@@ -218,7 +218,7 @@
 }
 
 
-/* ==================== FEATURES ==================== */
+/*  FEATURES  */
 
 .about-features {
     background: var(--white);
@@ -295,7 +295,7 @@
 }
 
 
-/* ==================== ABOUT PROJECT ==================== */
+/*  ABOUT PROJECT  */
 
 .about-project {
     background: var(--cream);
@@ -358,7 +358,7 @@
 }
 
 
-/* ==================== TEAM ==================== */
+/*  TEAM  */
 
 .about-team {
     background: var(--white);
@@ -468,7 +468,7 @@
 }
 
 
-/* ==================== CALL TO ACTION ==================== */
+/*  CALL TO ACTION  */
 
 .about-cta {
     background:
