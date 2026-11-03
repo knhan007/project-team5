@@ -43,8 +43,6 @@
 }
 
 
-
-
 * {
     margin: 0;
     padding: 0;
@@ -108,7 +106,7 @@ section {
 
 
 /* ==================================================
-   4. TYPOGRAPHY
+   3. TYPOGRAPHY
 ================================================== */
 
 h1,
@@ -154,7 +152,7 @@ p {
 
 
 /* ==================================================
-   5. HEADER & NAVBAR
+   4. HEADER & NAVBAR
 ================================================== */
 
 .header {
@@ -305,112 +303,6 @@ p {
 
 
 /* ==================================================
-   6. HERO SLIDER
-================================================== */
-
-.hero {
-    margin-top: 112px;
-    margin-bottom: 100px;
-}
-
-.hero-slider {
-    position: relative;
-
-    overflow: hidden;
-
-    background-color: var(--celeste-light);
-    border-radius: var(--radius-lg);
-}
-
-
-/* Individual slide */
-
-.hero-slide {
-    display: none;
-
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-
-    gap: 32px;
-
-    min-height: 490px;
-    padding: 58px 64px 92px;
-
-    animation: slideFade 0.6s ease both;
-}
-
-.hero-slide.active {
-    display: grid;
-}
-
-
-/* Text content */
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-
-    max-width: 480px;
-}
-
-.hero-content h1,
-.hero-content h2 {
-    margin-bottom: 22px;
-    letter-spacing: -1.5px;
-}
-
-.hero-description {
-    max-width: 410px;
-    margin-bottom: 22px;
-
-    font-size: 1rem;
-    line-height: 1.9;
-}
-
-.hero-meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    gap: 10px;
-    margin-bottom: 30px;
-
-    color: var(--blue);
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-
-/* Hero image */
-
-.hero-image {
-    position: relative;
-
-    width: 100%;
-    height: 350px;
-
-    overflow: hidden;
-
-    background-color: var(--skin);
-    border-radius: 48% 48% 24px 24px;
-    box-shadow: var(--shadow-soft);
-}
-
-.hero-image img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    transition: transform 0.7s ease;
-}
-
-.hero-slide.active .hero-image img {
-    animation: imageReveal 0.8s ease both;
-}
-
-
-/* ==================================================
    7. BUTTONS
 ================================================== */
 
@@ -470,11 +362,107 @@ p {
     transform: translateY(-2px);
 }
 
+/* HERO SLIDER */
 
+.hero {
+    margin-top: 112px;
+    margin-bottom: 100px;
+}
+
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 570px;
+    overflow: hidden;
+
+    background-color: var(--celeste-light);
+    border-radius: var(--radius-lg);
+}
+
+/* Dãy chứa tất cả slide */
+.hero-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* Từng slide */
+.hero-slide {
+    display: grid;
+    flex: 0 0 100%;
+
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 40px;
+
+    width: 100%;
+    height: 570px;
+    padding: 55px 64px 105px;
+}
+
+/* Nội dung chữ */
+.hero-content {
+    width: 100%;
+    min-width: 0;
+    max-width: 550px;
+}
+
+.hero-content h1 {
+    margin-bottom: 22px;
+    letter-spacing: -1.5px;
+    overflow-wrap: break-word;
+}
+
+.hero-description {
+    max-width: 480px;
+    margin-bottom: 22px;
+
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+.hero-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+    margin-bottom: 30px;
+
+    color: var(--blue);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Khung ảnh */
+.hero-image {
+    display: block;
+    width: 100%;
+    height: 350px;
+
+    overflow: hidden;
+    background-color: var(--skin);
+
+    border-radius: 48% 48% 24px 24px;
+    box-shadow: var(--shadow-soft);
+}
+
+.hero-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    opacity: 1;
+    filter: none;
+}
 /* ==================================================
    8. SLIDER CONTROLS
 ================================================== */
 
+/* Thanh điều khiển */
 .slider-controls {
     position: absolute;
     left: 64px;
@@ -500,7 +488,6 @@ p {
     border-radius: 50%;
 
     font-size: 1.1rem;
-
     transition: all var(--transition);
 }
 
@@ -519,25 +506,21 @@ p {
 .slider-dot {
     width: 8px;
     height: 8px;
-
     padding: 0;
 
     background-color: #B6D6E1;
     border: none;
     border-radius: 50%;
 
-    transition:
-        width var(--transition),
-        background-color var(--transition);
+    transition: width var(--transition),
+                background-color var(--transition);
 }
 
 .slider-dot.active {
     width: 26px;
-
     background-color: var(--orange);
     border-radius: 20px;
 }
-
 
 /* ==================================================
    9. SECTION HEADINGS
@@ -717,6 +700,7 @@ p {
     align-items: center;
 
     gap: 42px;
+    margin-top: 40px;
 
     margin-bottom: 100px;
     padding: 36px;
