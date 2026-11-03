@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savorly Admin</title>
+
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/admin.css">
+    
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="admin-page">
+
+    <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <a href="index.html" class="admin-logo"> 
+            <span class="brand-icon">S</span>
+            <span class="brand-name" style="color: var(--white);">savorly<span>.</span></span>
+        </a>
+
+        <p class="sidebar-label">ADMIN MENU</p>
+
+        <nav class="admin-nav">
+            <a href="#dashboard" class="admin-nav-link active">
+            <i class="fa-solid fa-chart-pie"></i>
+            Dashboard
+            </a>
+
+            <a href="#requests" class="admin-nav-link">
+            <i class="fa-solid fa-clock"></i>
+            Recipe Requests
+            <span class="nav-count">5</span>
+            </a>
+
+            <a href="#published" class="admin-nav-link">
+            <i class="fa-solid fa-book-open"></i>
+            Published Recipes
+            </a>
+        </nav>
+
+      <div class="admin-sidebar-bottom">
+        <button class="admin-nav-link logout-button" type="button">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="admin-main">
+
+      <!-- Header -->
+      <header class="admin-header">
+        <div>
+          <p class="admin-subtitle">Welcome back, Admin!</p>
+          <h1>Dashboard</h1>
+        </div>
+
+        <div class="admin-profile">
+          <div class="admin-avatar">
+            <i class="fa-solid fa-user-shield"></i>
+          </div>
+
+          <div>
+            <strong>Administrator</strong>
+            <span>Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard -->
+      <section id="dashboard" class="admin-section">
+        <div class="section-heading">
+          <div>
+            <h2>Overview</h2>
+            <p>Manage recipes submitted by users.</p>
+          </div>
+        </div>
+
+        <div class="admin-stats">
+
+          <article class="stat-card">
+            <div class="stat-icon pending-icon">
+              <i class="fa-solid fa-hourglass-half"></i>
+            </div>
+            <p>Pending Requests</p>
+            <h3 id="pending-count">05</h3>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon approved-icon">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <p>Approved Recipes</p>
+            <h3 id="approved-count">24</h3>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon rejected-icon">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+            <p>Rejected Recipes</p>
+            <h3 id="rejected-count">02</h3>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Recipe Requests -->
+      <section id="requests" class="admin-section">
+
+        <div class="section-heading">
+          <div>
+            <h2>Recipe Requests</h2>
+            <p>Review recipes submitted by users.</p>
+          </div>
+
+          
+        </div>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+
+            <thead>
+              <tr>
+                <th>Recipe</th>
+                <th>Submitted By</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="pending-recipes-table">
+
+             
+              
+
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <!-- Published Recipes -->
+      <section id="published" class="admin-section">
+
+        <div class="section-heading">
+          <div>
+            <h2>Published Recipes</h2>
+            <p>Recipes currently available on Explore.</p>
+          </div>
+        </div>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Recipe</th>
+                <th>Author</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="published-recipes-table">
+             
+            </tbody>
+
+          </table>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+
+  <script src="/assets/js/admin.js"></script>
+</body>
+</html>

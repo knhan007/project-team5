@@ -216,14 +216,44 @@ function setupEventListeners() {
     resetFiltersBtn.addEventListener("click", resetFilters);
 }
 
+function loadApprovedUserRecipes() {
+    const storedRecipes = localStorage.getItem("savorly_submissions");
+
+    if (!storedRecipes) {
+        return [];
+    }
+
+    const userRecipes = JSON.parse(storedRecipes);
+
+    if (!Array.isArray(userRecipes)) {
+        return [];
+    }
+
+    return userRecipes.filter(recipe => recipe.status === "approved");
+}
+
 async function initExplore() {
+    // Load recipes từ file JSON
     const loadedRecipes = await loadRecipes();
 
-    // JSON được sao chép vào bản chỉ đọc; mọi lần lọc chỉ đọc bản này.
-    const copiedRecipes = JSON.parse(
-        JSON.stringify(Array.isArray(loadedRecipes) ? loadedRecipes : [])
+    // Copy recipes JSON để tránh sửa dữ liệu gốc
+    const staticRecipes = JSON.parse(
+        JSON.stringify(
+            Array.isArray(loadedRecipes) ? loadedRecipes : []
+        )
     );
-    allRecipes = deepFreeze(copiedRecipes);
+
+    // Load recipes do user tạo và Admin đã approve
+    const userRecipes = loadApprovedUserRecipes();
+
+    // Gộp 2 nguồn dữ liệu
+    const combinedRecipes = [
+        ...staticRecipes,
+        ...userRecipes
+    ];
+
+    // Khóa dữ liệu để tránh vô tình thay đổi
+    allRecipes = deepFreeze(combinedRecipes);
 
     restoreFiltersFromUrl();
     setupEventListeners();

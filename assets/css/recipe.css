@@ -747,3 +747,60 @@
     gap: 9px;
 }
 
+#admin-review-actions {
+    margin-top: 24px;
+}
+
+.admin-review-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+#reject-recipe {
+    background: #fff;
+    color: #c0392b;
+    border: 1px solid #c0392b;
+}
+
+#admin-review-actions[hidden] {
+    display: none;
+}
+
+
+/* ==================================================
+   ADMIN BACK BUTTON
+================================================== */
+
+#back-to-admin {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    margin: 30px 50px;
+    padding: 12px 22px;
+
+    background-color: var(--celeste-light);
+    color: var(--blue);
+
+    border: 1px solid var(--border);
+    border-radius: 50px;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    transition: all var(--transition);
+}
+
+#back-to-admin:hover {
+    background-color: var(--celeste);
+    color: var(--blue-dark);
+
+    border-color: var(--celeste-dark);
+    transform: translateX(-4px);
+}
+
+#back-to-admin i {
+    font-size: 0.9rem;
+}
