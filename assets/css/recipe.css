@@ -768,16 +768,10 @@
     display: none;
 }
 
-
-/* ==================================================
-   ADMIN BACK BUTTON
-================================================== */
-
 #back-to-admin {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-
     margin: 30px 50px;
     padding: 12px 22px;
 
@@ -796,11 +790,15 @@
 #back-to-admin:hover {
     background-color: var(--celeste);
     color: var(--blue-dark);
-
     border-color: var(--celeste-dark);
     transform: translateX(-4px);
 }
 
 #back-to-admin i {
     font-size: 0.9rem;
+}
+
+/* Important: respect the hidden attribute */
+#back-to-admin[hidden] {
+    display: none !important;
 }
