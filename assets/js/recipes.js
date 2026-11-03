@@ -381,6 +381,12 @@ const mode = params.get("mode");
 const isAdminReview = mode === "admin";
 const isUserView = mode === "user";
 
+const backButton = document.getElementById("back-to-admin");
+
+if (backButton) {
+    backButton.hidden = !isAdminReview;
+}
+
 if (isAdminReview) {
     const breadcrumb = document.getElementById("recipe-breadcrumb");
     const footer = document.querySelector(".footer");
