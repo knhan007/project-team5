@@ -40,10 +40,13 @@
          2. MAIN RECIPE CONTENT
           -->
     <main class="recipe-page">
-
+        <a href="admin.html" id="back-to-admin" hidden>
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Admin
+    </a>
         <!-- Breadcrumb -->
 
-        <section class="recipe-breadcrumb container">
+        <section class="recipe-breadcrumb container" id="recipe-breadcrumb">
             <a href="index.html">Home</a>
 
             <i class="fa-solid fa-chevron-right"></i>
@@ -111,24 +114,57 @@
 
 
                 <!-- Hero actions -->
-
-                <div class="recipe-hero-actions">
-
-                    <button type="button" class="button button-primary recipe-save-button" id="recipe-favorite-button">
-
+                <div class="recipe-hero-actions" id="recipe-hero-actions">
+                    <button
+                        type="button"
+                        class="button button-primary recipe-save-button"
+                        id="recipe-favorite-button"
+                    >
                         <i class="fa-regular fa-heart"></i>
                         <span>Save Recipe</span>
-
                     </button>
 
-                    <button type="button" class="recipe-share-button" id="recipe-share-button">
-
+                    <button
+                        type="button"
+                        class="recipe-share-button"
+                        id="recipe-share-button"
+                    >
                         <i class="fa-solid fa-share-nodes"></i>
                         Share Recipe
-
                     </button>
 
                 </div>
+
+<!-- Admin Review Actions -->
+<div id="admin-review-actions" hidden>
+
+    <span class="status-badge status-pending" id="admin-review-status">
+        Pending Review
+    </span>
+
+    <div class="admin-review-buttons">
+
+        <button
+            type="button"
+            class="button button-primary"
+            id="approve-recipe"
+        >
+            <i class="fa-solid fa-check"></i>
+            Approve Recipe
+        </button>
+
+        <button
+            type="button"
+            class="button"
+            id="reject-recipe"
+        >
+            <i class="fa-solid fa-xmark"></i>
+            Reject Recipe
+        </button>
+
+    </div>
+
+</div>
 
             </div>
 

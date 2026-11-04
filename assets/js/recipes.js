@@ -45,10 +45,32 @@ function getRecipeById(id) {
 function getTotalTime(recipe) {
     return recipe.prepTime + recipe.cookingTime;
 }
-/* ========================================
+
+const SUBMISSION_STORAGE_KEY = "savorly_submissions";
+
+function loadSubmissions() {
+    const data = localStorage.getItem(SUBMISSION_STORAGE_KEY);
+
+    return data === null ? [] : JSON.parse(data);
+}
+function saveSubmissions(submissions) {
+    localStorage.setItem(
+        SUBMISSION_STORAGE_KEY,
+        JSON.stringify(submissions)
+    );
+}
+
+function getSubmissionById(id) {
+    const submissions = loadSubmissions();
+
+    return submissions.find(
+        sub => String(sub.id) === String(id)
+    );
+}
+/* 
    RECIPE DETAIL PAGE - đọc từ recipe.json
    Khớp với id/class trong recipe.html
-======================================== */
+ */
 
 (async function() {
 
@@ -249,11 +271,22 @@ function getTotalTime(recipe) {
 
 
     /* ---------- Đổ dữ liệu 1 món vào trang ---------- */
-
-    function showRecipe(recipe, recipeList) {
-
+    function showRecipe(recipe, recipeList, isAdminReview = false) {
         document.title = `${recipe.title} | Savorly`;
+            // Admin Review Mode
+        const heroActions = document.getElementById("recipe-hero-actions");
+        const adminActions = document.getElementById("admin-review-actions");
+        const relatedSection = document.querySelector(".related-recipes");
 
+        if (isAdminReview) {
+            if (heroActions) heroActions.hidden = true;
+            if (adminActions) adminActions.hidden = false;
+            if (relatedSection) relatedSection.hidden = true;
+        } else {
+            if (heroActions) heroActions.hidden = false;
+            if (adminActions) adminActions.hidden = true;
+            if (relatedSection) relatedSection.hidden = false;
+        }
         const image = document.getElementById("recipe-image");
         if (image) {
             image.src = recipe.image;
@@ -264,7 +297,7 @@ function getTotalTime(recipe) {
 
         setText("recipe-title", recipe.title);
         setText("recipe-description", recipe.description);
-        setText("recipe-author", recipe.createdBy || "Savorly Kitchen");
+        setText( "recipe-author",recipe.createdBy || recipe.submittedBy || "Savorly Kitchen");
 
         setText("recipe-prep-time", `${recipe.prepTime} min`);
         setText("recipe-cooking-time", `${recipe.cookingTime} min`);
@@ -289,21 +322,138 @@ function getTotalTime(recipe) {
         showRelated(recipe, recipeList);
     }
 
+    function handleAdminReview(id) {
+    const approveButton = document.getElementById("approve-recipe");
+    const rejectButton = document.getElementById("reject-recipe");
 
-    /* ---------- Lấy id trên URL, tìm món trong JSON ---------- */
+    function updateStatus(newStatus) {
+        const submissions = loadSubmissions();
 
-    const id = new URLSearchParams(window.location.search).get("id");
+        const recipe = submissions.find(
+            item => String(item.id) === String(id)
+        );
 
-    // loadRecipes() và getTotalTime() nằm trong recipes.js
-    const recipeList = await loadRecipes();
+        if (!recipe) {
+            alert("Recipe not found!");
+            return;
+        }
 
-    const recipe = recipeList.find(item => String(item.id) === String(id));
+        recipe.status = newStatus;
 
-    if (!recipe) {
-        showNotFound();
-        return;
+        saveSubmissions(submissions);
+
+        alert(`Recipe ${newStatus} successfully!`);
+
+        window.location.href = "admin.html";
     }
 
-    showRecipe(recipe, recipeList);
+    if (approveButton) {
+        approveButton.addEventListener("click", function() {
+            const confirmApprove = confirm(
+                "Are you sure you want to approve this recipe?"
+            );
 
+            if (confirmApprove) {
+                updateStatus("approved");
+            }
+        });
+    }
+
+    if (rejectButton) {
+        rejectButton.addEventListener("click", function() {
+            const confirmReject = confirm(
+                "Are you sure you want to reject this recipe?"
+            );
+
+            if (confirmReject) {
+                updateStatus("rejected");
+            }
+        });
+    }
+}
+
+/* ---------- Determine page mode ---------- */
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+const mode = params.get("mode");
+
+const isAdminReview = mode === "admin";
+const isUserView = mode === "user";
+
+const backButton = document.getElementById("back-to-admin");
+
+if (backButton) {
+    backButton.hidden = !isAdminReview;
+}
+
+if (isAdminReview) {
+    const breadcrumb = document.getElementById("recipe-breadcrumb");
+    const footer = document.querySelector(".footer");
+    const backButton = document.getElementById("back-to-admin");
+
+    if (breadcrumb) breadcrumb.style.display = "none";
+    if (footer) footer.style.display = "none";
+    if (backButton) backButton.hidden = false;
+}
+
+let recipeList = [];
+let recipe = null;
+
+
+/* ---------- Load recipe data ---------- */
+
+if (isAdminReview || isUserView) {
+
+    // Admin / User: lấy recipe từ localStorage
+    recipe = getSubmissionById(id);
+
+    if (recipe) {
+        recipeList = [recipe];
+    }
+
+} else {
+    // Explore: lấy recipe có sẵn từ JSON
+    const staticRecipes = await loadRecipes();
+
+    // Approved recipes do user tạo
+    const approvedUserRecipes = loadSubmissions().filter(
+        item => item.status === "approved"
+    );
+
+    // Gộp dữ liệu để Related Recipes có thể sử dụng
+    recipeList = [
+        ...staticRecipes,
+        ...approvedUserRecipes
+    ];
+
+    // Tìm món trong cả JSON và localStorage
+    recipe = recipeList.find(
+        item => String(item.id) === String(id)
+    );
+}
+
+
+/* ---------- Display recipe ---------- */
+
+if (!recipe) {
+
+    showNotFound();
+    return;
+
+}
+
+showRecipe(recipe, recipeList, isAdminReview);
+if (isAdminReview) {
+    handleAdminReview(id);
+}
+
+// User xem món của mình thì không cần related recipes
+if (isUserView) {
+    const relatedSection = document.querySelector(".related-recipes");
+
+    if (relatedSection) {
+        relatedSection.hidden = true;
+    }
+}
 })();

@@ -516,9 +516,10 @@
     </footer>
 
 
-    <!-- Load account state before the recipe page applies its access check -->
+    <!-- Load account state before page-specific access checks -->
     <script src="/assets/js/auth.js"></script>
     <script src="/assets/js/account.js"></script>
+    <!-- Shared data functions must load before page-specific JS -->
     <script src="/assets/js/my-recipes.js"></script>
 
 </body>
