@@ -11,7 +11,7 @@ let recipes = [];
 
 async function loadRecipes() {
     try {
-        const response = await fetch("/assets/data/recipe.json");
+        const response = await fetch("../assets/data/recipe.json");
 
         if (!response.ok) {
             throw new Error("Cannot load recipes.json");

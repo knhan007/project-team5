@@ -27,7 +27,7 @@
 
             const signIn = document.createElement("a");
             signIn.className = "nav-auth-link";
-            signIn.href = "/savorly/login.html";
+            signIn.href = window.SavorlyPaths.login;
             signIn.textContent = "Đăng nhập";
             slot.append(search, signIn);
             return;
@@ -76,7 +76,7 @@
         if (profile.role === window.SavorlyAuth.ROLES.ADMIN) {
             adminLink = document.createElement("a");
             adminLink.className = "account-admin-link";
-            adminLink.href = "/savorly/admin.html";
+            adminLink.href = window.SavorlyPaths.admin;
             adminLink.textContent = "Mở trang quản trị";
         }
 
@@ -92,7 +92,7 @@
         });
         logout.addEventListener("click", function () {
             window.SavorlyAuth.signOut().catch(function () {}).finally(function () {
-                window.location.replace("/savorly/login.html");
+                window.location.replace(window.SavorlyPaths.login);
             });
         });
         document.addEventListener("click", function (event) {

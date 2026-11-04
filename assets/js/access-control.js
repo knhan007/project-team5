@@ -1,13 +1,14 @@
 (function () {
     "use strict";
 
-    const LOGIN_PATH = "/savorly/login.html";
-    const STORE_PATH = "/savorly/index.html";
+    const paths = window.SavorlyPaths;
+    const LOGIN_PATH = paths ? paths.login : "login.html";
+    const STORE_PATH = paths ? paths.home : "index.html";
     const currentUrl = new URL(window.location.href);
 
     function requiresAdmin() {
-        return currentUrl.pathname === "/savorly/admin.html" ||
-            (currentUrl.pathname === "/savorly/recipe.html" &&
+        return currentUrl.pathname === (paths ? paths.admin : "admin.html") ||
+            (currentUrl.pathname === (paths ? paths.recipe : "recipe.html") &&
                 currentUrl.searchParams.get("mode") === "admin");
     }
 

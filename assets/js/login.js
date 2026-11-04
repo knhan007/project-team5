@@ -38,18 +38,24 @@
     });
 
     function getUserDestination() {
+        const paths = window.SavorlyPaths;
+        const appBasePath = paths ? paths.base : "./";
+        const homePath = paths ? paths.home : "index.html";
+        const loginPath = paths ? paths.login : "login.html";
+        const adminPath = paths ? paths.admin : "admin.html";
+        const recipePath = paths ? paths.recipe : "recipe.html";
         const next = new URLSearchParams(window.location.search).get("next");
-        if (!next || !next.startsWith("/savorly/") || next.startsWith("//")) {
-            return "/savorly/index.html";
+        if (!next || !next.startsWith(appBasePath) || next.startsWith("//")) {
+            return homePath;
         }
 
         const destination = new URL(next, window.location.origin);
         if (destination.origin !== window.location.origin ||
-            destination.pathname === "/savorly/login.html" ||
-            destination.pathname === "/savorly/admin.html" ||
-            (destination.pathname === "/savorly/recipe.html" &&
+            destination.pathname === loginPath ||
+            destination.pathname === adminPath ||
+            (destination.pathname === recipePath &&
                 destination.searchParams.get("mode") === "admin")) {
-            return "/savorly/index.html";
+            return homePath;
         }
 
         return destination.pathname + destination.search + destination.hash;
@@ -57,7 +63,7 @@
 
     function redirectAfterLogin(profile) {
         const destination = profile.role === window.SavorlyAuth.ROLES.ADMIN
-            ? "/savorly/admin.html"
+            ? window.SavorlyPaths.admin
             : getUserDestination();
         window.location.replace(destination);
     }

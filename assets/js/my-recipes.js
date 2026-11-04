@@ -46,7 +46,7 @@ async function requireAccount() {
     const next = encodeURIComponent(
         window.location.pathname + window.location.search + window.location.hash
     );
-    window.location.assign("/savorly/login.html?next=" + next);
+    window.location.assign(window.SavorlyPaths.login + "?next=" + next);
     return false;
 }
 
@@ -323,7 +323,7 @@ function renderRecipes() {
 
                 </div>
                 <a
-                    href="/savorly/recipe.html?id=${recipe.id}&mode=user"
+                    href="${window.SavorlyPaths.recipe}?id=${recipe.id}&mode=user"
                     class="view-details-button">
                     View Details
                 </a>

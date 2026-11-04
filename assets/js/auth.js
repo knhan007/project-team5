@@ -5,7 +5,18 @@
     const LEGACY_ACCOUNTS_KEY = "savorly.accounts.v1";
     const SESSION_KEY = "savorly.currentUser.v1";
     const ITERATIONS = 310000;
-    const ADMIN_SEED_PATH = "/assets/data/user.json";
+    const scriptUrl = document.currentScript
+        ? document.currentScript.src
+        : window.location.href;
+    const APP_BASE_PATH = new URL("../../savorly/", scriptUrl).pathname;
+    const ADMIN_SEED_PATH = new URL("../data/user.json", scriptUrl).pathname;
+    window.SavorlyPaths = Object.freeze({
+        base: APP_BASE_PATH,
+        home: APP_BASE_PATH + "index.html",
+        login: APP_BASE_PATH + "login.html",
+        admin: APP_BASE_PATH + "admin.html",
+        recipe: APP_BASE_PATH + "recipe.html"
+    });
     const DEFAULT_ADMIN = {
         id: "admin-seed",
         name: "Lee Thu",

@@ -385,7 +385,7 @@ window.SavorlyAuth.restoreSession().then(function (profile) {
 if (adminLogoutButton) {
     adminLogoutButton.addEventListener("click", function () {
         window.SavorlyAuth.signOut().finally(function () {
-            window.location.replace("/savorly/login.html");
+            window.location.replace(window.SavorlyPaths.login);
         });
     });
 }

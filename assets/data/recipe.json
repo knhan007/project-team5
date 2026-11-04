@@ -2,7 +2,7 @@
   {
     "id": "pasta",
     "title": "Fresh Tomato Pasta",
-    "image": "/assets/image/pasta.avif",
+    "image": "../assets/image/pasta.avif",
     "description": "A delicious pasta dish made with fresh tomatoes,beautiful flavors.",
     "mealType": "Lunch",
     "tags": [
@@ -69,7 +69,7 @@
   {
     "id": "salad",
     "title": "Garden Fresh Salad",
-    "image": "/assets/image/salad.avif",
+    "image": "../assets/image/salad.avif",
     "description": "Crisp greens and colorful vegetables with a refreshing dressing.",
     "mealType": "Lunch",
     "tags": [
@@ -131,7 +131,7 @@
   {
     "id": "chicken",
     "title": "Herb Roasted Chicken",
-    "image": "/assets/image/chicken.avif",
+    "image": "../assets/image/chicken.avif",
     "description": "Tender roasted chicken seasoned with aromatic herbs.",
     "mealType": "Dinner",
     "tags": [
@@ -198,7 +198,7 @@
   {
     "id": "pancakes",
     "title": "Fluffy Breakfast Pancakes",
-    "image": "/assets/image/pancake.avif",
+    "image": "../assets/image/pancake.avif",
     "description": "Soft golden pancakes for a cozy and satisfying morning.",
     "mealType": "Breakfast",
     "tags": [
@@ -265,7 +265,7 @@
   {
     "id": "avocado-toast",
     "title": "Creamy Avocado Toast",
-    "image": "/assets/image/avocado-toast.avif",
+    "image": "../assets/image/avocado-toast.avif",
     "description": "Crunchy toast topped with creamy avocado and simple seasonings.",
     "mealType": "Breakfast",
     "tags": [
@@ -328,7 +328,7 @@
   {
     "id": "berry-bowl",
     "title": "Berry Breakfast Bowl",
-    "image": "/assets/image/berry-bowl.avif",
+    "image": "../assets/image/berry-bowl.avif",
     "description": "Sweet berries and fresh fruit in a bright, colorful bowl.",
     "mealType": "Breakfast",
     "tags": [
@@ -390,7 +390,7 @@
   {
     "id": "fried-rice",
     "title": "Vegetable Fried Rice",
-    "image": "/assets/image/fried-rice.avif",
+    "image": "../assets/image/fried-rice.avif",
     "description": "A savory rice dish mixed with vegetables for a quick everyday meal.",
     "mealType": "Lunch",
     "tags": [
@@ -457,7 +457,7 @@
   {
     "id": "salmon",
     "title": "Lemon Herb Salmon",
-    "image": "/assets/image/salmon.avif",
+    "image": "../assets/image/salmon.avif",
     "description": "Flavorful salmon with herbs and a fresh hint of lemon.",
     "mealType": "Dinner",
     "tags": [
@@ -524,7 +524,7 @@
   {
     "id": "berry-yogurt",
     "title": "Berry Yogurt Parfait",
-    "image": "/assets/image/berry-yogurt.avif",
+    "image": "../assets/image/berry-yogurt.avif",
     "description": "Creamy yogurt layered with fruit for a simple sweet treat.",
     "mealType": "Dessert",
     "tags": [
@@ -586,7 +586,7 @@
   {
     "id": "chicken-wrap",
     "title": "Chicken Veggie Wrap",
-    "image": "/assets/image/chicken-wrap.avif",
+    "image": "../assets/image/chicken-wrap.avif",
     "description": "Tender chicken and crunchy vegetables wrapped for an easy lunch.",
     "mealType": "Lunch",
     "tags": [
@@ -653,7 +653,7 @@
   {
     "id": "banana-smoothie",
     "title": "Banana Berry Smoothie",
-    "image": "/assets/image/banana-smoothie.avif",
+    "image": "../assets/image/banana-smoothie.avif",
     "description": "A fruity smoothie that's refreshing and easy to prepare.",
     "mealType": "Breakfast",
     "tags": [
@@ -716,7 +716,7 @@
   {
     "id": "tomato-soup",
     "title": "Creamy Tomato Soup",
-    "image": "/assets/image/tomato-soup.avif",
+    "image": "../assets/image/tomato-soup.avif",
     "description": "A warm and comforting soup with rich tomato flavor.",
     "mealType": "Dinner",
     "tags": [

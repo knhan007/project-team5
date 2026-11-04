@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const AUTO_SLIDE_TIME = 5000;
     
     // 3. Tải dữ liệu món ăn từ JSON
-    fetch("/assets/data/recipe.json")
+    fetch("../assets/data/recipe.json")
         .then(function (response) {
             return response.json();
         })
