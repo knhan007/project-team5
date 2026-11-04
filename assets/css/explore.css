@@ -211,40 +211,8 @@
     transform: scale(1.05);
 }
 
-/* 9. Favorite Button */
-.favorite-button {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 50%;
-    background-color: var(--white);
-    color: var(--blue);
-    font-size: 17px;
-    cursor: pointer;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-    transition: all 0.25s ease;
-}
 
-.favorite-button:hover {
-    background-color: var(--skin);
-    color: var(--orange-dark);
-    transform: scale(1.08);
-}
-
-/* JavaScript can add this class when a recipe is favorited */
-.favorite-button.active {
-    background-color: var(--orange);
-    color: var(--white);
-}
-
-/* 10. Recipe Information */
+/* 9. Recipe Information */
 .explore-recipe-info {
     padding: 22px;
 }
@@ -278,7 +246,7 @@
     line-height: 1.7;
 }
 
-/* 11. Cooking Time and Difficulty */
+/* 10. Cooking Time and Difficulty */
 .explore-recipe-meta {
     display: flex;
     align-items: center;
@@ -311,7 +279,7 @@
     text-align: center;
 }
 
-/* 12. No Results Message */
+/* 11. No Results Message */
 .no-recipes {
     padding: 70px 20px;
     text-align: center;
