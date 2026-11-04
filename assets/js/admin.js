@@ -41,6 +41,60 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+function getSubmissionAuthorName(submission) {
+    const author = submission.submittedByName || submission.submittedBy || submission.createdBy;
+
+    try {
+        const accounts = JSON.parse(localStorage.getItem("user.json") || "[]");
+        let account = accounts.find(function (item) {
+            return (submission.submittedById && item.id === submission.submittedById) ||
+                item.id === author ||
+                (item.email && author &&
+                    item.email.toLowerCase() === String(author).toLowerCase());
+        });
+
+        const legacyId = /^user[_-](\d+)$/i.exec(
+            String(submission.submittedById || author || "")
+        );
+        if (!account && legacyId) {
+            const matchingUsers = accounts.filter(function (item) {
+                const accountNumber = /(?:^|[-_])(\d+)$/i.exec(String(item.id || ""));
+                return item.role === "user" && accountNumber &&
+                    accountNumber[1] === legacyId[1];
+            });
+            if (matchingUsers.length === 1) account = matchingUsers[0];
+        }
+
+        if (account && account.name) {
+            const updates = {
+                submittedById: account.id,
+                submittedByName: account.name,
+                submittedBy: account.name
+            };
+            Object.assign(submission, updates);
+
+            const submissions = loadSub();
+            const savedSubmission = submissions.find(function (item) {
+                return String(item.id) === String(submission.id);
+            });
+            if (savedSubmission && (savedSubmission.submittedById !== account.id ||
+                savedSubmission.submittedByName !== account.name ||
+                savedSubmission.submittedBy !== account.name)) {
+                Object.assign(savedSubmission, updates);
+                saveSub(submissions);
+            }
+
+            return account.name;
+        }
+
+        if (legacyId) return "Người dùng";
+    } catch (error) {
+        // Fall back to the submission's saved author label if account data is unavailable.
+    }
+
+    return author || "Người dùng";
+}
+
 
 /* =========================
    4. RENDER PENDING RECIPES
@@ -81,7 +135,7 @@ function renderSub() {
                     </div>
                 </td>
 
-                <td>${escapeHtml(sub.submittedBy)}</td>
+                <td>${escapeHtml(getSubmissionAuthorName(sub))}</td>
 
                 <td>${escapeHtml(sub.submittedAt)}</td>
 
@@ -168,7 +222,7 @@ function renderPublished() {
                     </div>
                 </td>
 
-                <td>${escapeHtml(sub.submittedBy)}</td>
+                <td>${escapeHtml(getSubmissionAuthorName(sub))}</td>
 
                 <td>${escapeHtml(sub.submittedAt)}</td>
 
@@ -317,3 +371,21 @@ if (publishedTable) {
 renderSub();
 renderPublished();
 updateDashboard();
+
+const adminLogoutButton = document.querySelector(".logout-button");
+const adminName = document.querySelector(".admin-profile strong");
+const adminRole = document.querySelector(".admin-profile span");
+
+window.SavorlyAuth.restoreSession().then(function (profile) {
+    if (!profile) return;
+    if (adminName) adminName.textContent = profile.name;
+    if (adminRole) adminRole.textContent = profile.email;
+});
+
+if (adminLogoutButton) {
+    adminLogoutButton.addEventListener("click", function () {
+        window.SavorlyAuth.signOut().finally(function () {
+            window.location.replace("/savorly/login.html");
+        });
+    });
+}

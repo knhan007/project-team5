@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="auth-checking">
 
 <head>
     <meta charset="UTF-8">
@@ -13,6 +13,29 @@
 </head>
 
 <body>
+    <header class="header">
+        <nav class="navbar container">
+            <a href="index.html" class="brand" aria-label="Savorly home">
+                <span class="brand-icon">S</span>
+                <span class="brand-name">savorly<span>.</span></span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="explore.html" class="nav-link active">Explore</a></li>
+                <li><a href="my-recipes.html" class="nav-link">
+                    <span><i class="fa-solid fa-bowl-food"></i></span>
+                    My Recipe
+                </a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+            <div class="account-slot" data-account-slot>
+                <a href="explore.html" class="search-button" aria-label="Tìm kiếm công thức">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                </a>
+                <a href="login.html" class="nav-auth-link">Đăng nhập</a>
+            </div>
+        </nav>
+    </header>
     <!-- 
          2. MAIN RECIPE CONTENT
           -->
@@ -453,6 +476,9 @@
 
     <script src="/assets/js/recipes.js"></script>
 
+    <script src="/assets/js/auth.js"></script>
+    <script src="/assets/js/access-control.js"></script>
+    <script src="/assets/js/account.js"></script>
 </body>
 
 </html>

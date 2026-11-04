@@ -35,7 +35,24 @@ const recipeCount = document.getElementById("my-recipes-count");
 
 const emptyState = document.getElementById("my-recipes-empty");
 
-function openRecipeForm() {
+async function requireAccount() {
+    const profile = window.SavorlyAuth
+        ? await window.SavorlyAuth.restoreSession()
+        : null;
+    if (profile) {
+        return true;
+    }
+
+    const next = encodeURIComponent(
+        window.location.pathname + window.location.search + window.location.hash
+    );
+    window.location.assign("/savorly/login.html?next=" + next);
+    return false;
+}
+
+async function openRecipeForm() {
+    if (!await requireAccount()) return;
+
     // Show the form section
     formSection.hidden = false;
 
@@ -163,8 +180,11 @@ function getRecipeFormData() {
 // 5. CREATE / UPDATE RECIPE
 // ========================================
 
-recipeForm.addEventListener("submit", function (event) {
+recipeForm.addEventListener("submit", async function (event) {
     event.preventDefault();
+
+    // Check the session before saving so an expired login cannot submit recipes.
+    if (!await requireAccount()) return;
 
     const recipeData = getRecipeFormData();
 
@@ -197,11 +217,13 @@ recipeForm.addEventListener("submit", function (event) {
 
     // CREATE new recipe
     else {
+        const profile = window.SavorlyAuth.getSession();
         const newRecipe = {
             ...recipeData,
             id: "recipe_" + Date.now(),
             status: "draft",
-            submittedBy: "user_001",
+            submittedBy: profile.name,
+            submittedById: profile.id,
             submittedAt: new Date().toISOString()
         };
 
@@ -483,5 +505,3 @@ cancelRecipeButton.addEventListener("click", closeRecipeForm);
 
 // Cancel button: clear only, keep form open
 discardRecipeButton.addEventListener("click", clearRecipeForm);
-
-

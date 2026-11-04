@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="auth-checking">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,10 +55,12 @@
                 
             </ul>
 
-            <!-- Search -->
-            <a href="explore.html" class="search-button">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
+            <div class="account-slot" data-account-slot>
+                <a href="explore.html" class="search-button" aria-label="Tìm kiếm công thức">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                </a>
+                <a href="login.html" class="nav-auth-link">Đăng nhập</a>
+            </div>
 
         </nav>
     </header>
@@ -459,5 +461,8 @@
 
     </footer>
 
+    <script src="/assets/js/auth.js"></script>
+    <script src="/assets/js/access-control.js"></script>
+    <script src="/assets/js/account.js"></script>
 </body>
 </html>
