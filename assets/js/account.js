@@ -72,6 +72,14 @@
             Number.isNaN(createdAt.getTime()) ? "—" :
                 createdAt.toLocaleDateString("vi-VN"));
 
+        let adminLink = null;
+        if (profile.role === window.SavorlyAuth.ROLES.ADMIN) {
+            adminLink = document.createElement("a");
+            adminLink.className = "account-admin-link";
+            adminLink.href = "/savorly/admin.html";
+            adminLink.textContent = "Mở trang quản trị";
+        }
+
         const logout = document.createElement("button");
         logout.type = "button";
         logout.className = "account-logout";
@@ -84,7 +92,7 @@
         });
         logout.addEventListener("click", function () {
             window.SavorlyAuth.signOut().catch(function () {}).finally(function () {
-                window.location.reload();
+                window.location.replace("/savorly/login.html");
             });
         });
         document.addEventListener("click", function (event) {
@@ -100,7 +108,9 @@
             }
         });
 
-        menu.append(heading, list, logout);
+        menu.append(heading, list);
+        if (adminLink) menu.appendChild(adminLink);
+        menu.appendChild(logout);
         slot.append(trigger, menu);
     }
 

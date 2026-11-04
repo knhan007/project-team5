@@ -155,6 +155,10 @@ p {
    4. HEADER & NAVBAR
 ================================================== */
 
+html.auth-checking body {
+    visibility: hidden;
+}
+
 .header {
     position: fixed;
     top: 0;
@@ -398,6 +402,18 @@ p {
     overflow-wrap: anywhere;
     color: var(--blue);
     font-size: 0.88rem;
+}
+
+.account-admin-link {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--blue);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.account-admin-link:hover {
+    color: var(--orange-dark);
 }
 
 .account-logout {

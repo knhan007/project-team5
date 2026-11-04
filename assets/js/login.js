@@ -37,13 +37,39 @@
         });
     });
 
-    function redirectAfterLogin() {
+    function getUserDestination() {
         const next = new URLSearchParams(window.location.search).get("next");
-        const destination = next && next.startsWith("/") && !next.startsWith("//")
-            ? next
-            : "/savorly/index.html";
-        window.location.assign(destination);
+        if (!next || !next.startsWith("/savorly/") || next.startsWith("//")) {
+            return "/savorly/index.html";
+        }
+
+        const destination = new URL(next, window.location.origin);
+        if (destination.origin !== window.location.origin ||
+            destination.pathname === "/savorly/login.html" ||
+            destination.pathname === "/savorly/admin.html" ||
+            (destination.pathname === "/savorly/recipe.html" &&
+                destination.searchParams.get("mode") === "admin")) {
+            return "/savorly/index.html";
+        }
+
+        return destination.pathname + destination.search + destination.hash;
     }
+
+    function redirectAfterLogin(profile) {
+        const destination = profile.role === window.SavorlyAuth.ROLES.ADMIN
+            ? "/savorly/admin.html"
+            : getUserDestination();
+        window.location.replace(destination);
+    }
+
+    window.SavorlyAuth.restoreSession().then(function (profile) {
+        if (profile) redirectAfterLogin(profile);
+    });
+
+    window.SavorlyAuth.ready.catch(function (error) {
+        showMessage(error.message || "Không thể khởi tạo tài khoản.");
+        submitButtons.forEach(function (button) { button.disabled = true; });
+    });
 
     loginForm.addEventListener("submit", async function (event) {
         event.preventDefault();
@@ -55,7 +81,7 @@
                 document.getElementById("login-password").value
             );
             window.SavorlyAuth.saveSession(profile);
-            redirectAfterLogin();
+            redirectAfterLogin(profile);
         } catch (error) {
             showMessage(error.message || "Đăng nhập chưa thành công.");
         } finally {
@@ -74,17 +100,12 @@
                 password: document.getElementById("signup-password").value
             });
             window.SavorlyAuth.saveSession(profile);
-            redirectAfterLogin();
+            redirectAfterLogin(profile);
         } catch (error) {
             showMessage(error.message || "Đăng ký chưa thành công.");
         } finally {
             setBusy(false);
         }
-    });
-
-    window.SavorlyAuth.ready.catch(function (error) {
-        showMessage(error.message || "Không thể khởi tạo tài khoản.");
-        submitButtons.forEach(function (button) { button.disabled = true; });
     });
 
 }());

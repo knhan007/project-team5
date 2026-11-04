@@ -67,6 +67,58 @@ function getSubmissionById(id) {
         sub => String(sub.id) === String(id)
     );
 }
+
+function getRecipeAuthorName(recipe) {
+    const author = recipe.submittedByName || recipe.submittedBy || recipe.createdBy;
+
+    try {
+        const accounts = JSON.parse(localStorage.getItem("user.json") || "[]");
+        let account = accounts.find(function (item) {
+            return (recipe.submittedById && item.id === recipe.submittedById) ||
+                item.id === author ||
+                (item.email && author &&
+                    item.email.toLowerCase() === String(author).toLowerCase());
+        });
+
+        const legacyId = /^user[_-](\d+)$/i.exec(String(recipe.submittedById || author || ""));
+        if (!account && legacyId) {
+            const matchingUsers = accounts.filter(function (item) {
+                const accountNumber = /(?:^|[-_])(\d+)$/i.exec(String(item.id || ""));
+                return item.role === "user" && accountNumber &&
+                    accountNumber[1] === legacyId[1];
+            });
+            if (matchingUsers.length === 1) account = matchingUsers[0];
+        }
+
+        if (account && account.name) {
+            const updates = {
+                submittedById: account.id,
+                submittedByName: account.name,
+                submittedBy: account.name
+            };
+            Object.assign(recipe, updates);
+
+            const submissions = loadSubmissions();
+            const savedRecipe = submissions.find(function (item) {
+                return String(item.id) === String(recipe.id);
+            });
+            if (savedRecipe && (savedRecipe.submittedById !== account.id ||
+                savedRecipe.submittedByName !== account.name ||
+                savedRecipe.submittedBy !== account.name)) {
+                Object.assign(savedRecipe, updates);
+                saveSubmissions(submissions);
+            }
+
+            return account.name;
+        }
+
+        if (legacyId) return "Người dùng";
+    } catch (error) {
+        // Fall back to the recipe's saved author label if account data is unavailable.
+    }
+
+    return author || "Savorly Kitchen";
+}
 /* 
    RECIPE DETAIL PAGE - đọc từ recipe.json
    Khớp với id/class trong recipe.html
@@ -297,7 +349,7 @@ function getSubmissionById(id) {
 
         setText("recipe-title", recipe.title);
         setText("recipe-description", recipe.description);
-        setText( "recipe-author",recipe.createdBy || recipe.submittedBy || "Savorly Kitchen");
+        setText("recipe-author", getRecipeAuthorName(recipe));
 
         setText("recipe-prep-time", `${recipe.prepTime} min`);
         setText("recipe-cooking-time", `${recipe.cookingTime} min`);

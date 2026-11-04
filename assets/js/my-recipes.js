@@ -217,11 +217,13 @@ recipeForm.addEventListener("submit", async function (event) {
 
     // CREATE new recipe
     else {
+        const profile = window.SavorlyAuth.getSession();
         const newRecipe = {
             ...recipeData,
             id: "recipe_" + Date.now(),
             status: "draft",
-            submittedBy: "user_001",
+            submittedBy: profile.name,
+            submittedById: profile.id,
             submittedAt: new Date().toISOString()
         };
 

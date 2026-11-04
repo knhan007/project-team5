@@ -141,7 +141,34 @@
                 return account.email === email ||
                     (seedUser.id && account.id === seedUser.id);
             });
-            if (!exists) await createAccountRecord(seedUser, ROLES.USER);
+            if (!exists) {
+                await createAccountRecord(seedUser, ROLES.USER);
+                continue;
+            }
+
+            const existing = accounts.find(function (account) {
+                return account.email === email ||
+                    (seedUser.id && account.id === seedUser.id);
+            });
+            let hasUsableCredentials = false;
+            if (existing) {
+                try {
+                    hasUsableCredentials = base64ToBytes(existing.salt).length === 16 &&
+                        base64ToBytes(existing.verifier).length === 32 &&
+                        base64ToBytes(existing.iv).length === 12 &&
+                        base64ToBytes(existing.profile).length > 0;
+                } catch (error) {
+                    hasUsableCredentials = false;
+                }
+            }
+
+            if (!hasUsableCredentials) {
+                writeAccounts(accounts.filter(function (account) {
+                    return account.email !== email &&
+                        (!seedUser.id || account.id !== seedUser.id);
+                }));
+                await createAccountRecord(seedUser, ROLES.USER);
+            }
         }
     }
 
