@@ -203,12 +203,22 @@ recipeForm.addEventListener("submit", async function (event) {
             return;
         }
 
-        recipes[recipeIndex] = {
+        const previousStatus = recipes[recipeIndex].status;
+        const updatedRecipe = {
             ...recipes[recipeIndex],
-            ...recipeData
+            ...recipeData,
+            status: previousStatus === "pending"
+                ? "draft"
+                : (previousStatus || "draft")
         };
+        if (previousStatus === "pending") {
+            delete updatedRecipe.submittedAt;
+        }
+        recipes[recipeIndex] = updatedRecipe;
 
-        alert("Recipe updated successfully!");
+        alert(previousStatus === "pending"
+            ? "Recipe updated as a draft. Submit it when you are ready for admin review."
+            : "Recipe updated successfully!");
     }
 
     // CREATE new recipe
