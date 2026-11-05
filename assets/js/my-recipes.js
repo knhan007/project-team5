@@ -205,14 +205,10 @@ recipeForm.addEventListener("submit", async function (event) {
 
         recipes[recipeIndex] = {
             ...recipes[recipeIndex],
-            ...recipeData,
-
-            // Send edited recipe back for admin review
-            status: "pending",
-            submittedAt: new Date().toISOString()
+            ...recipeData
         };
 
-        alert("Recipe updated and submitted for admin review!");
+        alert("Recipe updated successfully!");
     }
 
     // CREATE new recipe
